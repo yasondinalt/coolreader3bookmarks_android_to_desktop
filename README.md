@@ -6,4 +6,4 @@ Output Linux Wine: ~/.wine/drive_c/users/{USER}/cr3/cr3hist.bmk
 Take book id in table 'bookmark', column 'book_fk'.
 On Linux: sqliteman cr3db.sqlite
 
-python3.4 cr3db2histbmk.py
+python3.4 coolreader3bookmarks_android_to_desktop.py
