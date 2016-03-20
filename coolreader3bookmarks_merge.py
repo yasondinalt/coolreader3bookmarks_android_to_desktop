@@ -90,8 +90,8 @@ for file in tree_output.iterfind("file"):
     filename = file.xpath('.//doc-filename')[0].text
     if filename.lower().endswith('txt'):
         for bmk in file.xpath('.//bookmark'):
-            start_point = bmk.xpath('.//start-point')[0].text
-            bmk.xpath('.//start-point')[0].text = start_point.replace('section/p', 'pre')
+            start_point = bmk.xpath('.//start-point')[0]
+            start_point.text = start_point.text.replace('section/p', 'pre')
 
 
 tree_output.write("cr3hist.bmk", encoding="utf-8", xml_declaration=True)
