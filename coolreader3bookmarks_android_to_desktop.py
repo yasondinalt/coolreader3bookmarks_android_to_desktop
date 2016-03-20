@@ -20,6 +20,7 @@ On Linux: sqliteman cr3db.sqlite
 """
 
 import sqlite3 as sqlite
+from html import escape
 
 # access by key
 def dict_factory(cursor, row):
@@ -46,7 +47,7 @@ for db_book in db_books:
     <bookmark type="{btype}" percent="{percent}%" timestamp="{timestamp}" shortcut="{shortcut}" page="0">
         <start-point>{start_pos}</start-point>
         <end-point/>
-        </header-text>
+        <header-text/>
         <selection-text>{pos_text}</selection-text>
         <comment-text/>
     </bookmark>
@@ -55,8 +56,8 @@ for db_book in db_books:
                     timestamp = b['time_stamp'],
                     shortcut = b['shortcut'],
                     start_pos = b['start_pos'],
-                    pos_text = b['pos_text'])
-    if len(bookmarks) > 0:
+                    pos_text = escape(b['pos_text']))
+    if len(bookmarks) > 1: # 1 to ignore 'lastpos', created for every open file
         all_books += """
   <file>
     <file-info>
@@ -71,7 +72,7 @@ for db_book in db_books:
     {bookmarks}
     </bookmark-list>
   </file>
-        """.format( pathname = db_book['pathname'],
+        """.format( pathname = escape(db_book['pathname']),
                     filename = db_book['filename'],
                     title = db_book['title'],
                     filesize = db_book['filesize'],
